@@ -1,0 +1,57 @@
+@import "../../styles/animations.scss";
+
+.container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(158 158 158 / 5%);
+    flex-direction: column;
+}
+
+.icon {
+    position: relative;
+    opacity: 0.5;
+    border-radius: 0 0.2rem 0.2rem 0;
+    -webkit-transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease;
+    width: 4em;
+    height: 4em;
+
+    &::before {
+        content: "";
+        position: absolute;
+        margin: -0.6em 0 0 -0.6em;
+        width: 4em;
+        height: 4em;
+        border-radius: 500rem;
+        border: 0.2em solid rgba(0,0,0,.1);
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        margin: -0.6em 0 0 -0.6em;
+        width: 4em;
+        height: 4em;
+        -webkit-animation: button-spin 0.6s linear;
+        animation: button-spin 0.6s linear;
+        -webkit-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+        border-radius: 500rem;
+        border-color: #767676 transparent transparent;
+        border-style: solid;
+        border-width: 0.2em;
+        -webkit-box-shadow: 0 0 0 1px transparent;
+        box-shadow: 0 0 0 1px transparent;
+    }
+}
+
+.footer {
+    span {
+        margin-top: 10px;
+        display: flex;
+        opacity: .8;
+    }
+}
