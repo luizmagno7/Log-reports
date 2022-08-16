@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 
 import './styles/globals.scss';
-import App from './pages/App';
+import App from './pages/Routes';
 import reportWebVitals from './reportWebVitals';
+import { AuthProvider } from './contexts/Auth';
+import { BrowserRouter } from 'react-router-dom';
+import Loading from './components/Loading/index';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -11,7 +14,13 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App />
+    <AuthProvider>
+      <BrowserRouter>
+        <Suspense fallback={<Loading loadingText="Carregando..." />}>
+          <App />
+        </Suspense>
+      </BrowserRouter>
+    </AuthProvider>
   </React.StrictMode>
 );
 

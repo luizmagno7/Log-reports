@@ -1,0 +1,36 @@
+.container {
+    padding: 0 2rem;
+}
+
+.main {
+    min-height: 100vh;
+    padding: 4rem 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: right;
+}
+
+.mainContent {
+    width: 40%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--white);
+    justify-content: center;
+    padding: 2rem;
+
+    @media (max-width: 720px) {
+        width: 100%;
+    }
+    
+    @media (prefers-color-scheme: dark) {
+        background-color: var(--dark-blue-500);
+    }
+
+    .title {
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+    }
+}
