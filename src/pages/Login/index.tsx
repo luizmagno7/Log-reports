@@ -15,13 +15,14 @@ const Login: React.FC = () => {
     function handleLogin(event:any) {
         event.preventDefault();
 
-        auth.dispatch({ type: "LOGIN", payload: { user: "luiz magno", token: "teste"}})
+        auth.login( { user: "luiz magno", token: "teste"});
 
         navigate("/", {replace: true})
     }
 
     useEffect(() => {
-        if (auth.state.isAuthenticated) {
+        console.info('[hook]', auth)
+        if (!!auth.isAuthenticated) {
             navigate("/", {replace: true})
         }
     }, [])

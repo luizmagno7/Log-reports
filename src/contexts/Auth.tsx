@@ -1,63 +1,56 @@
-import React, { createContext, useContext } from 'react';
+import { useReducer, createContext } from 'react';
 
-type Props = {
-    children: React.ReactNode,
-};
-
-interface IAuthContext {
-    [key: string]: any;
+interface AuthContextValue {
+    isAuthenticated: boolean;
+    login: ( payload: object ) => void;
+    logout: () => void;
 }
 
-const initialState = {
-    isAuthenticated: false,
-    user: null,
-    token: null,
-};
+interface Action {
+    type: 'LOGIN' | 'LOGOUT';
+    payload?: any;
+}
 
-const reducer = (state: any, action: any) => {
+function authReducer(state: AuthContextValue, action: Action): AuthContextValue {
     switch (action.type) {
         case "LOGIN":
             localStorage.setItem("user", JSON.stringify(action.payload.user));
             localStorage.setItem("token", JSON.stringify(action.payload.token));
             return {
                 ...state,
-                isAuthenticated: true,
-                user: action.payload.user,
-                token: action.payload.token
+                isAuthenticated: true
             };
         case "LOGOUT":
             localStorage.clear();
             return {
                 ...state,
-                isAuthenticated: false,
-                user: null
+                isAuthenticated: false
             };
         default:
-            console.info("[default]")
-
             return state;
     }
-};
+}
 
-const AuthContext = createContext<IAuthContext>(initialState);
+export const AuthContext = createContext<AuthContextValue>({
+    isAuthenticated: false,
+    login: () => { },
+    logout: () => { }
+});
 
-export const AuthProvider: React.FC<Props> = ({ children }: Props) => {
-    const auth = useContext(AuthContext)
-
-    const localUser = localStorage.getItem("user");
-    const localtoken = localStorage.getItem("token");
-
-    auth.user = localUser;
-    auth.token = localtoken;
-    auth.isAuthenticated = !!localUser;
-
-    const [state, dispatch] = React.useReducer(reducer, auth);
+export function AuthProvider(props: { children: React.ReactNode }) {
+    const [state, dispatch] = useReducer(authReducer, {
+        isAuthenticated: false,
+        login: ( payload ) => {
+            dispatch({ type: 'LOGIN', payload });
+        },
+        logout: () => {
+            dispatch({ type: 'LOGOUT' });
+        }
+    });
 
     return (
-        <AuthContext.Provider value={{ state, dispatch }}>
-            {children}
+        <AuthContext.Provider value={state}>
+            {props.children}
         </AuthContext.Provider>
     );
-};
-
-export default AuthContext;
+}

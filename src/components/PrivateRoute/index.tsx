@@ -12,12 +12,12 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ ...rest }:PrivateRouteProps
 
     const handleLogout = (event:any) => {
         event.preventDefault();
-        auth.dispatch({type: "LOGOUT"});
+        auth.logout();
 
         navigate("/login", {replace: true});
     }
 
-    if (!auth.state.isAuthenticated) {
+    if (!auth.isAuthenticated) {
         return <Navigate to="/login" replace={true} />
     }
 

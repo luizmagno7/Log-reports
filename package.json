@@ -1,5 +1,5 @@
 {
-  "name": "msf-logs-doacao",
+  "name": "log",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

@@ -42,7 +42,7 @@ const Home: React.FC = () => {
           <header className={styles.headerContainer}>
             <h1 className="heading">Reports</h1>
 
-            <Search />
+            {/* <Search /> */}
           </header>
 
           <div className={styles.mainContent}>

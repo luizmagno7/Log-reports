@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams, Link } from "react-router-dom";
 import ReactJson from 'react-json-view'
 
-import AuthContext from '../../contexts/Auth';
+import { AuthContext } from '../../contexts/Auth';
 import '../../services/logSchema';
 
 import styles from "./Log.module.scss"
